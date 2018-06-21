@@ -1,4 +1,11 @@
 # myjava
-这是一个java的项目库
-我会尝试将我所做的java项目放入库中保存
-以便于管理和交流使用
+杩欐槸涓�涓猨ava鐨勯」鐩簱
+鎴戜細灏濊瘯灏嗘垜鎵�鍋氱殑java椤圭洰鏀惧叆搴撲腑淇濆瓨
+浠ヤ究浜庣鐞嗗拰浜ゆ祦浣跨敤
+
+* group_chat
+   > 澶氫汉鑱婂ぉ
+* single_person_chat
+   > 鍗曚汉鑱婂ぉ
+* plane_game
+   > 椋炴満娓告垙锛堥潪瀹屾垚)
