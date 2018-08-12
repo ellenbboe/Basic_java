@@ -8,4 +8,4 @@
 * single_person_chat
    > 单人聊天
 * plane_game
-   > 飞机游戏（非完成)
+   > 飞机游戏

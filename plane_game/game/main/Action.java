@@ -13,4 +13,12 @@ public class Action {
 	public void move(Flyobject object) {
 		
 	}
+	public boolean shoted() {
+		return true;
+	}
+	
+	public boolean hited() {
+		return true;
+	}
+	
 }
