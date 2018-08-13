@@ -4,11 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-
+import thisobject.Bullet;
+import thisobject.Enemy;
 import thisobject.Hero;
 
 //逻辑处理
 public class Dao {
+	private int herostep = 3;
 	protected boolean up;
 	protected boolean down;
 	protected boolean left;
@@ -33,8 +35,12 @@ public class Dao {
 		y = y + 20;
 		g.drawString("Life: " +hero.getlife(), x, y);
 	}
-	public void drawBullets(Graphics g) {
-		
+	public void drawBullets(Graphics g,Bullet[] bullet) {
+		for(int i = 0;i<bullet.length;i++) {
+			Bullet f = bullet[i];
+			g.drawImage(f.getEnemyb(), f.getEnemybx(), f.getEnemyby(), null);
+			g.drawImage(f.getHerob(), f.getHerobx(), f.getHeroby(), null);
+		}
 	}
 	public void drawHero(Graphics g,Hero hero) {
 		if(hero.getX()<0)
@@ -46,23 +52,29 @@ public class Dao {
 		if(hero.getY() >(PanelHeight - drawplaneHeight))
 			hero.setY(PanelHeight - drawplaneHeight);
 		if(up == true) {
-			hero.setY(hero.getY() - 3);
+			hero.setY(hero.getY() - herostep);
 		}
 		if(down == true) {
-			hero.setY(hero.getY() + 3);
+			hero.setY(hero.getY() + herostep);
 		}
 		if(left == true) {
-			hero.setX(hero.getX() - 3);
+			hero.setX(hero.getX() - herostep);
 		}
 		if(right == true) {
-			hero.setX(hero.getX() + 3);
+			hero.setX(hero.getX() + herostep);
 		}
 		g.drawImage(Start.Hero,hero.getX(),hero.getY(),drawplaneWidth,drawplaneHeight,null);
 	}
 	
-	public void drawEnemy(Graphics g) {
-		
+	
+	public void drawEnemy(Graphics g,Enemy[] flying) {
+		for (int i = 0; i < flying.length; i++) {
+			Enemy f = flying[i];
+			g.drawImage(f.getImage(), f.getX(), f.getY(), null);
+		}
 	}
+	
+	
 	public void drawBackground(Graphics g) {
 		g.drawImage(Start.Background,0, 0, PanelWidth,PanelHeight, null);//背景
 	}

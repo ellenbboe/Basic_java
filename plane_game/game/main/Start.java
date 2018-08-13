@@ -13,12 +13,16 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import thisobject.Bullet;
+import thisobject.Enemy;
 import thisobject.Hero;
 
 //游戏主界面
 public class Start extends JPanel implements KeyListener{
-
+	
 	private Dao dao=new Dao();
+	private Enemy[] flyings = {}; // 敌机数组
+	private Bullet[] bullets = {}; // 子弹数组
 	private Hero hero = new Hero();
 	private final int PanelWidth = dao.PanelWidth;
 	private final int PanelHeight = dao.PanelHeight;

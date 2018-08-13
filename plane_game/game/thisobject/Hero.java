@@ -3,7 +3,7 @@ package thisobject;
 import main.Dao;
 
 //玩家
-public class Hero extends Flyobject{
+public class Hero {
 	private Dao dao = new Dao();
 	private int life =100;
 	private int x=dao.PanelWidth/2;
