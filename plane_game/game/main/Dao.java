@@ -11,6 +11,7 @@ import thisobject.Hero;
 
 //逻辑处理
 public class Dao {
+	private int life = 3;
 	private int herostep = 3;
 	protected boolean up;
 	protected boolean down;
@@ -19,28 +20,43 @@ public class Dao {
 	public static int PanelWidth = 1200;
 	public static int PanelHeight = 800;
 	protected static int drawplaneWidth = 100;
-	protected static int drawenemyWidth = 200;
+	public static int drawenemyWidth = 200;
 	protected static int drawplaneHeight= 60;
 	protected static int drawenemyHeight= 120;
-	protected static int drawBulletWidth= 40;
-	protected static int drawBulletHeight= 60;
+	protected static int drawBulletWidth= 30;
+	protected static int drawBulletHeight= 30;
 	private int score = 100;
 	
 	public int getScore() {
 		return score;
 	}
+	public int getlife() {
+		return life;
+	}
+	public void setlife(int life) {
+		this.life = life;
+	}
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public void drawState(Graphics g,Hero hero) {
+	public void drawState(Graphics g) {
 		int x = 10;
 		int y = 25;
-		Font font = new Font(Font.SANS_SERIF, Font.BOLD,22);
+		Font font = new Font(Font.SANS_SERIF, Font.BOLD,24);
 		g.setColor(new Color(0xff0000));
 		g.setFont(font);
-		g.drawString("Score: "+score,x,y);
-		y = y + 20;
-		g.drawString("Life: " +hero.getlife(), x, y);
+		if(life>0) {
+			g.drawString("Score: "+score,x,y);
+			y = y + 20;
+			g.drawString("Life: " +life, x, y);
+		}else {
+			Font font2 = new Font(Font.SANS_SERIF, Font.BOLD,100);
+			g.setFont(font2);
+			g.drawString("YOU ARE DEAD",100, Dao.PanelHeight/2-50);
+			g.drawString("press R to restart",100, Dao.PanelHeight/2+100);
+			g.drawString("当前处于娱乐模式",100, Dao.PanelHeight/2+200);
+			
+		}
 	}
 	public void drawBullets(Graphics g,Bullet[] bullet,Enemy[] enemy,Hero hero) {
 		for(int i = 0;i<bullet.length;i++) {
@@ -78,7 +94,7 @@ public class Dao {
 	}
 	
 	
-	public void drawEnemy(Graphics g,Enemy[] flying,Bullet[] bullets,Hero hero) {
+	public void drawEnemy(Graphics g,Enemy[] flying,Hero hero) {
 		for (int i = 0; i < flying.length; i++) {
 			Enemy f = flying[i];
 			if(f.out == false)

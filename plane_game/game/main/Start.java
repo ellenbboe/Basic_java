@@ -22,8 +22,8 @@ public class Start extends JPanel implements KeyListener{
 	
 	private Dao dao=new Dao();
 	private Action action = new Action();
-	private Enemy[] enemy = {}; // 敌机数组
-	private Bullet[] bullets = {}; // 子弹数组
+	private Enemy[] enemy = {};
+	private Bullet[] bullets = {}; 
 	private Hero hero = new Hero();
 	private final int PanelWidth = Dao.PanelWidth;
 	private final int PanelHeight = Dao.PanelHeight;
@@ -31,16 +31,12 @@ public class Start extends JPanel implements KeyListener{
 	public static BufferedImage Enemy;
 	public static BufferedImage Background;
 	public static BufferedImage Herobullet;
-//	public static BufferedImage Enemybullet;
-	//public static BufferedImage boomimage;
 	static{
 		try {
 			Hero = ImageIO.read(Start.class.getResourceAsStream("../image/hero.png"));
 			Enemy = ImageIO.read(Start.class.getResourceAsStream("../image/enemy.png"));
 			Background = ImageIO.read(Start.class.getResourceAsStream("../image/map.jpg"));
 			Herobullet = ImageIO.read(Start.class.getResourceAsStream("../image/herobullet.png"));
-			//Enemybullet = ImageIO.read(Start.class.getResourceAsStream("../image/enemybullet.png"));
-			//boomimage = ImageIO.read(Start.class.getResourceAsStream("../image/blow.gif"));
 			
 		}catch(IOException e) {
 			e.printStackTrace();		
@@ -60,54 +56,46 @@ public class Start extends JPanel implements KeyListener{
 	}
 	public void create() {
 		slowpart(bullets, enemy, hero, dao);
-	}
+ 	}
 	public void paint(Graphics g) {
 		super.paint(g);
 		dao.drawBackground(g);
-		dao.drawState(g, hero);
+		dao.drawState(g);
 		dao.drawHero(g, hero);
 		dao.drawBullets(g, bullets,enemy,hero);
-		dao.drawEnemy(g, enemy,bullets,hero);
+		dao.drawEnemy(g, enemy,hero);
 		destory_enemy();
 		destory_bullets();
-		System.out.println("飞机"+enemy.length);
-		System.out.println("子弹"+bullets.length);
 	}
 	
 	
 	public  void destory_bullets() {
 		int length = bullets.length;
-		int a = 0;
 		for(int i = 0;i<bullets.length;i++) {
 			Bullet b = bullets[i];
-			if(b.out == true && length != 0) {
+			if(b.out == true) {
 				Bullet temp = bullets[length - 1];
 				bullets[length -1] = b;
 				bullets[i] = temp;
 				length --;
-				a = 1;
+				bullets = Arrays.copyOf(bullets, length);
 			}
 		}
-		if(a == 1 && length != 0)
-		bullets = Arrays.copyOf(bullets, length -1);
-		
 	}
+	
 	public void destory_enemy() {
 		
 		int length = enemy.length;
-		int a = 0;
 		for(int i = 0;i<enemy.length;i++) {
 			Enemy e = enemy[i];
-			if(e.out == true && length != 0) {
-				a =1;
+			if(e.out == true) {
 				Enemy temp = enemy[length - 1];
 				enemy[length -1] = e;
 				enemy[i] = temp;
 				length--;
+				enemy = Arrays.copyOf(enemy, length);
 			}
 		}
-		if(a ==1 && length != 0)
-		enemy = Arrays.copyOf(enemy, length - 1);
 	}
 	
 	public void slowpart(Bullet[] bullet,Enemy[] enemys,Hero hero,Dao dao) {
@@ -158,7 +146,7 @@ public class Start extends JPanel implements KeyListener{
 		
 			threadpaint.start();
 			threadcreate.start();
-	
+			
 	}
 
 	@Override
@@ -177,6 +165,11 @@ public class Start extends JPanel implements KeyListener{
 		case KeyEvent.VK_DOWN:
 			dao.down = true;
 			break;
+		case KeyEvent.VK_R:
+			enemy = new Enemy[0];
+			bullets = new Bullet[0];
+			hero = new Hero();
+			dao=new Dao();
 		}
 	}
 	@Override

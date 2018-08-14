@@ -9,7 +9,7 @@ import main.Start;
 public class Enemy{
 	private  int xspeed =4;
 	private  BufferedImage image = Start.Enemy;
-	private int x =(int)(Math.random()*Dao.PanelWidth-300+100);
+	private int x =(int)(Math.random()*(Dao.PanelWidth-Dao.drawenemyWidth));
 	private int y = 0;
 	public boolean out = false;
 	private Bullet[] bullets;
