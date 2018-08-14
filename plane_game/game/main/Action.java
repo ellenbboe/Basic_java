@@ -97,6 +97,7 @@ public class Action {
 					Dao.drawenemyWidth && b.getY()+Dao.drawBulletHeight > e.getY() && b.getY() 
 					< e.getY() + Dao.drawenemyHeight ){
 				b.out = true;
+				e.out = true;
 				dao.setScore(dao.getScore() + 1);
 			}else if(b.getY()<=0) {
 				b.out = true;
