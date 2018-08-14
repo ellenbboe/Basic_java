@@ -4,12 +4,15 @@ import main.Dao;
 
 //玩家
 public class Hero {
-	private Dao dao = new Dao();
+
 	private int life =100;
-	private int x=dao.PanelWidth/2;
-	private int y=dao.PanelHeight/2;
+	private int x=Dao.PanelWidth/2;
+	private int y=Dao.PanelHeight/2;
 	public int getlife() {
 		return life;
+	}
+	public void setlife(int life) {
+
 	}
 	public int getX() {
 		return x;

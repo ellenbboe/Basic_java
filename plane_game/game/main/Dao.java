@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+
 import thisobject.Bullet;
 import thisobject.Enemy;
 import thisobject.Hero;
@@ -15,16 +16,22 @@ public class Dao {
 	protected boolean down;
 	protected boolean left;
 	protected boolean right;
-	public int PanelWidth = 1200;
-	public int PanelHeight = 800;
-	protected int drawplaneWidth = 100;
-	protected int drawenemyWidth = 200;
-	protected int drawplaneHeight= 60;
-	protected int drawenemyHeight= 120;
-	protected int drawBulletWidth= 40;
-	protected int drawBulletHeight= 60;
-	public int score = 0;
+	public static int PanelWidth = 1200;
+	public static int PanelHeight = 800;
+	protected static int drawplaneWidth = 100;
+	protected static int drawenemyWidth = 200;
+	protected static int drawplaneHeight= 60;
+	protected static int drawenemyHeight= 120;
+	protected static int drawBulletWidth= 40;
+	protected static int drawBulletHeight= 60;
+	private int score = 100;
 	
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
 	public void drawState(Graphics g,Hero hero) {
 		int x = 10;
 		int y = 25;
@@ -35,11 +42,15 @@ public class Dao {
 		y = y + 20;
 		g.drawString("Life: " +hero.getlife(), x, y);
 	}
-	public void drawBullets(Graphics g,Bullet[] bullet) {
+	public void drawBullets(Graphics g,Bullet[] bullet,Enemy[] enemy,Hero hero) {
 		for(int i = 0;i<bullet.length;i++) {
 			Bullet f = bullet[i];
-			g.drawImage(f.getEnemyb(), f.getEnemybx(), f.getEnemyby(), null);
-			g.drawImage(f.getHerob(), f.getHerobx(), f.getHeroby(), null);
+			if(f.out == false)
+			g.drawImage(f.getImage(), f.getX(), f.getY(),drawBulletWidth,drawBulletHeight, null);
+			Action.move(f);
+			for(int j = 0;j<enemy.length;j++) {
+				Action.hit(f,enemy[j], this);
+			}
 		}
 	}
 	public void drawHero(Graphics g,Hero hero) {
@@ -67,10 +78,13 @@ public class Dao {
 	}
 	
 	
-	public void drawEnemy(Graphics g,Enemy[] flying) {
+	public void drawEnemy(Graphics g,Enemy[] flying,Bullet[] bullets,Hero hero) {
 		for (int i = 0; i < flying.length; i++) {
 			Enemy f = flying[i];
-			g.drawImage(f.getImage(), f.getX(), f.getY(), null);
+			if(f.out == false)
+			g.drawImage(f.getImage(), f.getX(), f.getY(),drawenemyWidth,drawenemyHeight, null);
+			Action.move(f);
+			Action.hit(hero, f, this);
 		}
 	}
 	
