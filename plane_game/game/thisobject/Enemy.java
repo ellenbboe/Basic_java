@@ -8,6 +8,7 @@ import main.Start;
 
 public class Enemy{
 	private  int xspeed =4;
+	private int yspeed = 4;
 	private  BufferedImage image = Start.Enemy;
 	private int x =(int)(Math.random()*(Dao.PanelWidth-Dao.drawenemyWidth));
 	private int y = 0;
@@ -20,6 +21,14 @@ public class Enemy{
 
 	public void setXspeed(int xspeed) {
 		this.xspeed = xspeed;
+	}
+
+	public int getYspeed() {
+		return yspeed;
+	}
+
+	public void setYspeed(int yspeed) {
+		this.yspeed = yspeed;
 	}
 
 	public BufferedImage getImage() {

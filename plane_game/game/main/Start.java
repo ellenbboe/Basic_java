@@ -16,10 +16,11 @@ import javax.swing.JPanel;
 import thisobject.Bullet;
 import thisobject.Enemy;
 import thisobject.Hero;
-
+import thisobject.Boss;
 //游戏主界面
 public class Start extends JPanel implements KeyListener{
 	private Dao dao=new Dao();
+	private Boss boss = new Boss();
 	private Action action = new Action();
 	private Enemy[] enemy = {};
 	private Bullet[] bullets = {}; 
@@ -30,13 +31,14 @@ public class Start extends JPanel implements KeyListener{
 	public static BufferedImage Enemy;
 	public static BufferedImage Background;
 	public static BufferedImage Herobullet;
+	public static BufferedImage Boss;
 	static{
 		try {
 			Hero = ImageIO.read(Start.class.getResourceAsStream("../image/hero.png"));
 			Enemy = ImageIO.read(Start.class.getResourceAsStream("../image/enemy.png"));
 			Background = ImageIO.read(Start.class.getResourceAsStream("../image/map.jpg"));
 			Herobullet = ImageIO.read(Start.class.getResourceAsStream("../image/herobullet.png"));
-			
+			Boss = ImageIO.read(Start.class.getResourceAsStream("../image/master.png"));
 		}catch(IOException e) {
 			e.printStackTrace();		
 		}
@@ -60,9 +62,10 @@ public class Start extends JPanel implements KeyListener{
 		super.paint(g);
 		dao.drawBackground(g);
 		dao.drawState(g);
+		dao.drawBoss(g,boss,hero,dao);
 		dao.drawHero(g, hero);
 		dao.drawBullets(g, bullets,enemy,hero);
-		dao.drawEnemy(g, enemy,hero);
+		dao.drawEnemy(g, enemy,hero,dao);
 		destory_enemy();
 		destory_bullets();
 	}
