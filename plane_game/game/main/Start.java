@@ -19,7 +19,6 @@ import thisobject.Hero;
 
 //游戏主界面
 public class Start extends JPanel implements KeyListener{
-	
 	private Dao dao=new Dao();
 	private Action action = new Action();
 	private Enemy[] enemy = {};

@@ -19,7 +19,6 @@ public class Action {
 		if(a<0) {
 			e.setXspeed(-e.getXspeed());
 		}
-		System.out.println(e.getX());
 		enemy = Arrays.copyOf(enemy, enemy.length + 1);
 		enemy[enemy.length - 1] = e;
 		return enemy;
